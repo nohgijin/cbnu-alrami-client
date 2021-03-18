@@ -6,15 +6,16 @@ const Name = styled.div`
   padding: 10px;
   background-color: var(--menu-gray);
   box-shadow: var(--menu-box-shadow);
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   min-width: 20%;
   display: flex;
   justify-content: center;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
+  height: 1rem;
 
-  :visited {
+  &.active {
     color: var(--name-red);
   }
 `

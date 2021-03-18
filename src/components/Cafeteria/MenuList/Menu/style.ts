@@ -9,7 +9,6 @@ const Menu = styled.div`
   border-radius: 0.7rem;
   padding: 15px;
   line-height: 1.5rem;
-  margin-bottom: 1rem;
-  
+  margin-bottom: 1.5rem;
 `
 export default Menu

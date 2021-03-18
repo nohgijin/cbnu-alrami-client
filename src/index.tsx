@@ -4,9 +4,9 @@ import { ApolloProvider } from '@apollo/client'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 
-import Home from '@src/components/Home'
-import Notice from '@src/components/Notice'
-import Cafeteria from '@src/components/Cafeteria'
+import Home from '@components/Home'
+import Notice from '@components/Notice'
+import Cafeteria from '@components/Cafeteria'
 import { client } from '@src/apollo'
 import '@src/assets/style/base.css'
 

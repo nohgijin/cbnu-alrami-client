@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 
 import Time from './Time'
 import Menu from './Menu'
+import MenuEmpty from '@components/MenuEmpty'
 import { GET_CAFETERIA_NAME_STATE, GET_DATE_STATE } from '@src/apollo/quries'
 
 interface Menus {
@@ -39,31 +40,27 @@ function MenuList() {
   const { data } = useQuery<MenuData>(GET_MENU, {
     variables: { name: nameDate.cafeteriaName, date: `${date.year()}-${date.month() + 1}-${date.date()}` },
   })
-
-  const menuDetail = {
-    breakfast: data?.cafeteria?.breakfast,
-    lunch: data?.cafeteria?.lunch,
-    dinner: data?.cafeteria?.dinner,
-  }
+  const [breakfast, lunch, dinner] = [data?.cafeteria?.breakfast, data?.cafeteria?.lunch, data?.cafeteria?.dinner]
 
   return (
     <>
-      {menuDetail.breakfast && (
+      {!data && <MenuEmpty />}
+      {breakfast && (
         <>
           <Time timezone="아침" />
-          <Menu menu={menuDetail.breakfast} />
+          <Menu menu={breakfast} />
         </>
       )}
-      {menuDetail.lunch && (
+      {lunch && (
         <>
           <Time timezone="점심" />
-          <Menu menu={menuDetail.lunch} />
+          <Menu menu={lunch} />
         </>
       )}
-      {menuDetail.dinner && (
+      {dinner && (
         <>
           <Time timezone="저녁" />
-          <Menu menu={menuDetail.dinner} />
+          <Menu menu={dinner} />
         </>
       )}
     </>

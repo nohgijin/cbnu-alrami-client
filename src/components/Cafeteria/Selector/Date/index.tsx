@@ -1,11 +1,12 @@
-import { useQuery } from '@apollo/client'
+import { useReactiveVar } from '@apollo/client'
+
 import dayjs from 'dayjs'
-import { GET_DATE_STATE } from '@src/apollo/quries'
 import StyledDate from './style'
+import { dateVar } from '@src/apollo/cache'
 
 function Date() {
-  const { data } = useQuery(GET_DATE_STATE)
-  return <StyledDate>{dayjs(data.date).format('YYYY년 MM월 DD일 ddd요일')}</StyledDate>
+  const date = useReactiveVar(dateVar)
+  return <StyledDate>{dayjs(date).format('YYYY년 MM월 DD일 (ddd)')}</StyledDate>
 }
 
 export default Date
