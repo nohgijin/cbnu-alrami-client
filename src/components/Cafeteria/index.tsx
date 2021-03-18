@@ -4,18 +4,22 @@ import Time from './Time'
 import Menu from './Menu'
 import StyledCafeteria from './style'
 
-interface MenuProps {
-  date: Date
+interface Menus {
+  date: String
   type: Boolean
   name: String
-  breakfast: String
-  lunch: String
-  dinner: String
+  breakfast?: String
+  lunch?: String
+  dinner?: String
+}
+
+interface MenuData {
+  cafeteria: Menus
 }
 
 const GET_MENU = gql`
-  query {
-    cafeteria(name: "본관", date: "2021-03-17T15:00:00.000Z") {
+  query getMenu($name: String!, $date: String!) {
+    cafeteria(name: $name, date: $date) {
       date
       type
       name
@@ -27,15 +31,30 @@ const GET_MENU = gql`
 `
 
 function Cafeteria() {
-  const { loading, error, data } = useQuery<MenuProps>(GET_MENU)
+  const { loading, error, data } = useQuery<MenuData>(GET_MENU, {
+    variables: { name: '본관', date: '2021-03-18' },
+  })
+
+  if (loading || error) return null
+
+  const menuDetail = [
+    { 아침: data?.cafeteria.breakfast },
+    { 점심: data?.cafeteria.lunch },
+    { 저녁: data?.cafeteria.dinner },
+  ]
+
   return (
     <StyledCafeteria>
-      <Time timezone="아침" />
-      <Menu menu="밥이다" />
-      <Time timezone="점심" />
-      <Menu menu="밥이다" />
-      <Time timezone="저녁" />
-      <Menu menu="밥이다" />
+      {menuDetail.map(menu => (
+        <>
+          {Object.values(menu).toString().length !== 0 && (
+            <>
+              <Time timezone={Object.keys(menu).toString()} />
+              <Menu menu={Object.values(menu).toString()} />
+            </>
+          )}
+        </>
+      ))}
     </StyledCafeteria>
   )
 }

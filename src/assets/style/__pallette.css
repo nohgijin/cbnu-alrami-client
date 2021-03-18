@@ -1,4 +1,6 @@
 :root {
   --black-500: rgb(36, 33, 33);
   --gray-100: rgb(221, 221, 221);
+  --menu-gray: #f0f2f3;
+  --menu-box-shadow: 0 0.125rem 0.3125rem rgb(0 0 0 / 12%);
 }

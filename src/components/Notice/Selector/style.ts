@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import '@src/assets/style/__pallette.css'
 
 export const SelectorWrapper = styled.ul`
