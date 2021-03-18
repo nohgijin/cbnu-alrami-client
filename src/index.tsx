@@ -5,7 +5,7 @@ import { ApolloProvider } from '@apollo/client'
 import Home from '@src/components/Home'
 import Notice from '@src/components/Notice'
 import Cafeteria from '@src/components/Cafeteria'
-import { client } from '@src/apollo/client'
+import { client } from '@src/apollo'
 import '@src/assets/style/base.css'
 
 ReactDOM.render(
