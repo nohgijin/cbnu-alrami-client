@@ -14,7 +14,7 @@ export interface Day {
 
 function calendar(date: Date): Week[] {
   const fullMonth: Day[] = []
-  const parsingFullMonth: Week[] = Array.from(Array(6), (_,index) => ({
+  const parsingFullMonth: Week[] = Array.from(Array(6), (_, index) => ({
     numOfWeek: index + 1,
     days: Array(7),
   }))
@@ -66,4 +66,14 @@ function calendar(date: Date): Week[] {
   return parsingFullMonth
 }
 
-export { calendar }
+function getDayClassName(displayDate: Date, year: number, month: number, date: number, day: number): string {
+  const today = new Date()
+  if (month !== displayDate.getMonth()) return 'day other-month'
+  if (date === today.getDate() && month === today.getMonth() && year === today.getFullYear()) return 'day today'
+  if (day === 6) return 'day sat'
+  if (day === 0) return 'day sun'
+
+  return 'day'
+}
+
+export { calendar, getDayClassName }
