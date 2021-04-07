@@ -1,5 +1,6 @@
 import StyledNoticeCard from './style'
 import NoticeDetail from '../../NoticeDetail'
+import useOpenDialog from '@src/hooks/useOpenDialog'
 
 export interface NoticeCardProps {
   noticeId: number
@@ -10,11 +11,7 @@ export interface NoticeCardProps {
 }
 
 function NoticeCard({ noticeId, title, depart, type, date }: NoticeCardProps) {
-  let openDialog: Function
-
-  const openCallbackDetailDialog = (cb: Function) => {
-    openDialog = cb
-  }
+  const [openDialog, openCallback] = useOpenDialog()
 
   return (
     <>
@@ -30,7 +27,7 @@ function NoticeCard({ noticeId, title, depart, type, date }: NoticeCardProps) {
           <div className="date">{date}</div>
         </div>
       </StyledNoticeCard>
-      <NoticeDetail {...{ noticeId, openCallback: openCallbackDetailDialog }} />
+      <NoticeDetail {...{ noticeId, openCallback }} />
     </>
   )
 }
